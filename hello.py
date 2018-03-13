@@ -21,3 +21,6 @@ def xubiao():
         return '你真是个小天才'
     else:
         return '%s真是个小天才' % a
+
+
+xubiao()
