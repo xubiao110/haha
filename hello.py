@@ -15,5 +15,9 @@ pasd()
 print('徐彪通知：我是李大钊')
 
 
-
-print('李大钊同志辛苦啦')
+def xubiao():
+    a = input("请输入能输入的东西：")
+    if a == 'xubiao':
+        return '你真是个小天才'
+    else:
+        return '%s真是个小天才' % a
