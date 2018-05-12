@@ -6,21 +6,22 @@ Python生成二维码
 make_qr：将文本生成白底黑字的二维码图片
 make_logo_qr：将文本生成带logo的二维码图片
 """
-import random
+import os
+import datetime
+
 import qrcode
 from PIL import Image
-import os
 
 
 # 生成二维码图片
-def make_qr(str, save):
+def make_qr(str1, save):
     qr = qrcode.QRCode(
         version=4,  # 生成二维码尺寸的大小 1-40  1:21*21（21+(n-1)*4）
         error_correction=qrcode.constants.ERROR_CORRECT_M,  # L:7% M:15% Q:25% H:30%
         box_size=10,  # 每个格子的像素大小
         border=2,  # 边框的格子宽度大小
     )
-    qr.add_data(str)
+    qr.add_data(str1)
     qr.make(fit=True)
 
     img = qr.make_image()
@@ -28,7 +29,7 @@ def make_qr(str, save):
 
 
 # 生成带logo的二维码图片
-def make_logo_qr(str, logo, save):
+def make_logo_qr(str2, logo, save):
     # 参数配置
     qr = qrcode.QRCode(
         version=4,
@@ -37,7 +38,7 @@ def make_logo_qr(str, logo, save):
         border=2
     )
     # 添加转换内容
-    qr.add_data(str)
+    qr.add_data(str2)
     #
     qr.make(fit=True)
     # 生成二维码
@@ -74,12 +75,14 @@ def make_logo_qr(str, logo, save):
 
 
 if __name__ == '__main__':
-    img_num = random.randrange(1000)
-    save_path = 'qr_%d.png' % img_num  # 生成后的保存文件
-    logo = 'logo.jpg'  # logo图片
+    img_num = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    save_path = 'qr_%s.png' % img_num  # 生成后的保存文件
+    logo = 'logo.png'  # logo图片
 
-    str = input('请输入要生成二维码的文本内容：')
+    str3 = input('请输入要生成二维码的文本内容：')
 
-    # make_qr(str, save_path)
+    # 普通二维码
+    # make_qr(str3, save_path)
 
-    make_logo_qr(str, logo, save_path)
+    # 带logo的二维码
+    make_logo_qr(str3, logo, save_path)
